@@ -1,0 +1,56 @@
+SQLite version 3.38.0 2022-02-22 18:58:40
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open Library.db
+sqlite> .databases
+main: D:\SQL\Library.db r/w
+sqlite> create table Author (ID integer not null primary key autoincrement, FIO text not null);
+sqlite> .tables
+Author
+sqlite> insert into Author values(1,'СевереринСЕ');
+sqlite> insert into Author values(2,'ПорхачЛП');
+sqlite> insert into Author values(3,'ЮщукНД');
+sqlite> insert into Author values(4,'КондратьевВК');
+sqlite> insert into Author values(5,'ЧелышевЮА');
+sqlite> insert into Author values(6,'КолесниковЛЛ');
+sqlite> insert into Author values(7,'ХаркевичДА');
+sqlite> select*from Author;
+sqlite> .mode box
+sqlite> select*from Author;
+sqlite> create table Faculty(ID integer not null primary key autoincrement, Name text not null);
+sqlite> insert into Faculty values(1,'лечебный');
+sqlite> insert into Faculty values(2,'фармацевтический');
+sqlite> insert into Faculty values(3,'стоматологический');
+sqlite> select*from Faculty;
+sqlite>create table Book(ID integer not null primary key autoincrement, Title text not null, YearOfPublication integer not null, ID_Author integer, ID_Faculty integer);
+sqlite>insert into Book values(1,'Биологическая химия', 2018, 1, 2);
+sqlite>insert into Book values(2,'Анатомия и физиология', 2013, 2, 1);
+sqlite>insert into Book values(3,'Антибиотики и иммунитет', 2012, 3, 2);
+sqlite>insert into Book values(4,'Инфекционные болезни', 2021, 3, 1);
+sqlite>insert into Book values(5,'Латинский язык для стоматологов', 2008, 4, 3);
+sqlite>insert into Book values(6,'Гистология', 1997, 5, 1);
+sqlite>insert into Book values(7,'Анатомия зубов', 2007, 6, 3);
+sqlite>insert into Book values(8,'Фармакология', 2017, 7, 2);
+sqlite>select*from Book;
+sqlite>select FIO, Title from Author inner join Book on Author.ID=Book.ID_Author;
+sqlite>select Title, Name from Faculty inner join Book on Faculty.ID=Book.ID_Faculty;
+sqlite>select Title from Book;
+sqlite>select Name from faculty;
+sqlite>select FIO from Author;
+sqlite>select Title from Book where YearOfPublication<2000;
+sqlite>select Title from Book where YearOfPublication>2020;
+sqlite>select Title from Author inner join Book on Author.ID=Book.ID_Author where FIO='ЮщукНД';
+sqlite>select Title from Faculty inner join Book on Faculty.ID=Book.ID_Faculty where Name='лечебный';
+sqlite>select Title from Book order by Title;
+sqlite>select Title, FIO from Author inner join Book on Author.ID=Book.ID_Author order by FIO;
+sqlite>select Title, Name from Faculty inner join Book on Faculty.ID=Book.ID_Faculty order by Name DESC;
+sqlite>select Title, FIO from Author inner join Book on Author.ID=Book.ID_Author order by FIO, Title DESC;
+sqlite>select Title, FIO, YearOfPublication from Author inner join Book on Author.ID=Book.ID_Author order by YearOfPublication;
+sqlite>select Title from Author inner join Book on Author.ID=Book.ID_Author where FIO like 'К%';
+sqlite>select Title from Author inner join Book on Author.ID=Book.ID_Author where FIO like '%вич%';
+sqlite>select Title from Book where Title not like '%то%';
+sqlite>select Title from Book where ID_Author not in (3,4,5);
+sqlite>select Title from Book where ID_Faculty in (1,2);
+sqlite>select Title from Book where ID_Author is not NULL;
+sqlite>select Title from Book where ID_Faculty is NULL;
